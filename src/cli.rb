@@ -2,6 +2,7 @@ require 'thor'
 require_relative './encryptor'
 require_relative './keypair'
 require_relative './encrypted_value'
+require_relative './encryption_paths'
 
 class Cli < Thor
   desc 'generate-keypair', 'Write public and private key files into the keys directory'
@@ -29,5 +30,12 @@ class Cli < Thor
     private_key = Keypair.read_private_key(options[:environment])
     encrypted_value = EncryptedValue.read(options[:environment], options[:key])
     puts Encryptor.decrypt(encrypted_value, private_key)
+  end
+
+  desc 'keys', 'Show all keys for an environment'
+  option :environment, required: true
+  def keys
+    keys_path = EncryptionPaths.environment(options[:environment])
+    puts Dir.entries("#{keys_path}").select {|file| !File.directory? file}
   end
 end
