@@ -1,6 +1,6 @@
 require 'openssl'
 require 'base64'
-require_relative './keypair'
+require 'ostruct'
 
 module Encryptor
   KEY_LENGTH = 4096
@@ -8,9 +8,9 @@ module Encryptor
   def self.generate_keypair
     keypair = OpenSSL::PKey::RSA.new(KEY_LENGTH)
 
-    Keypair.new(
-      OpenSSL::PKey::RSA.new(keypair.public_key.to_pem),
-      OpenSSL::PKey::RSA.new(keypair.to_pem)
+    OpenStruct.new(
+      public_key: OpenSSL::PKey::RSA.new(keypair.public_key.to_pem),
+      private_key: OpenSSL::PKey::RSA.new(keypair.to_pem)
     )
   end
 
