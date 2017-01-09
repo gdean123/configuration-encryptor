@@ -26,7 +26,7 @@ For instance `./bin/encryptor generate-keypair --environment production` will ge
 
 Run `./bin/encryptor encrypt --key <key> --value <value> --environment <environment>` to encrypt the given key/value pair using the public key and store the output file in configuration/<environment>/<key>.
 
-For instance, running `./bin/encryptor encrypt --key DATABASE_URL --value http://some-database-server.com:5432 --environment staging` will create a configuration/staging/DATABASE_URL file containing the encrypted value of http://some-database-server.com:5432.
+For instance, running `./bin/encryptor encrypt --key DATABASE_URL --value http://some-database-server.com:5432 --environment staging` will create a `configuration/staging/DATABASE_URL` file containing the encrypted value of `http://some-database-server.com:5432`.
 
 It assumes that the public key is stored in keys/<environment>/public.key.
 

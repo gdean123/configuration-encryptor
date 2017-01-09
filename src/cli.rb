@@ -1,6 +1,7 @@
 require 'thor'
 require 'fileutils'
 require_relative './encryptor'
+require_relative './paths'
 
 class Cli < Thor
   desc 'generate-keypair', 'Write public and private key files into the keys directory'
@@ -8,12 +9,10 @@ class Cli < Thor
   def generate_keypair
     keypair = Encryptor.generate_keypair
 
-    path = "keys/#{options[:environment]}"
-    FileUtils.mkdir_p(path)
-    Dir.chdir(path) do
-      File.write('public.key', keypair.public_key)
-      File.write('private.key', keypair.private_key)
-    end
+    keys_path = Paths.keys(options[:environment])
+    FileUtils.mkdir_p(keys_path)
+    File.write(Paths.public_key(options[:environment]), keypair.public_key)
+    File.write(Paths.private_key(options[:environment]), keypair.private_key)
   end
 
   desc 'encrypt', 'Encrypt a value using the public key'
@@ -21,9 +20,9 @@ class Cli < Thor
   option :value, required: true
   option :environment, required: true
   def encrypt
-    public_key_path = "keys/#{options[:environment]}/public.key"
-    environment_path = "configuration/#{options[:environment]}"
-    encrypted_value_path = "#{environment_path}/#{options[:key]}"
+    public_key_path = Paths.public_key(options[:environment])
+    environment_path = Paths.environment(options[:environment])
+    encrypted_value_path = Paths.encrypted_value(options[:environment], options[:key])
 
     encrypted_value = Encryptor.encrypt(options[:value], File.read(public_key_path))
     FileUtils.mkdir_p(environment_path)
@@ -34,9 +33,9 @@ class Cli < Thor
   option :key, required: true
   option :environment, required: true
   def decrypt
-    private_key_path = "keys/#{options[:environment]}/private.key"
-    environment_path = "configuration/#{options[:environment]}"
-    encrypted_value_path = "#{environment_path}/#{options[:key]}"
+    private_key_path = Paths.private_key(options[:environment])
+    environment_path = Paths.environment(options[:environment])
+    encrypted_value_path = Paths.encrypted_value(options[:environment], options[:key])
 
     encrypted_value = File.read(encrypted_value_path)
     puts Encryptor.decrypt(encrypted_value, File.read(private_key_path))
