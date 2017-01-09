@@ -1,6 +1,6 @@
 require 'ostruct'
 require_relative './file_encryptor'
-require_relative './encryption_paths'
+require_relative './support/encryption_paths'
 
 module Environment
   def self.key_value_pairs(environment)

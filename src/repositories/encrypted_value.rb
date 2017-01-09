@@ -1,5 +1,5 @@
 require 'fileutils'
-require_relative './encryption_paths'
+require_relative '../support/encryption_paths'
 
 module EncryptedValue
   def self.read(environment, key)
