@@ -1,4 +1,4 @@
-module Paths
+module EncryptionPaths
   def self.keys(environment)
     "keys/#{environment}"
   end
