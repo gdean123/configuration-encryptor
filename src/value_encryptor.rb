@@ -2,7 +2,7 @@ require 'openssl'
 require 'base64'
 require 'ostruct'
 
-module Encryptor
+module ValueEncryptor
   KEY_LENGTH = 4096
 
   def self.generate_keypair

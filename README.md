@@ -12,6 +12,8 @@ Install the required gems with `bundle install`
 ./bin/encryptor generate-keypair --environment staging
 ./bin/encryptor encrypt --key DATABASE_URL --value http://localhost:5432 --environment staging
 ./bin/encryptor decrypt --key DATABASE_URL --environment staging
+./bin/encryptor show --environment staging
+./bin/encryptor keys --environment staging
 ```
 
 ## Usage
