@@ -30,7 +30,7 @@ Run `./bin/encryptor encrypt --key <key> --value <value> --environment <environm
 
 For instance, running `./bin/encryptor encrypt --key DATABASE_URL --value http://some-database-server.com:5432 --environment staging` will create a `configuration/staging/DATABASE_URL` file containing the encrypted value of `http://some-database-server.com:5432`.
 
-It assumes that the public key is stored in keys/<environment>/public.key.
+It assumes that the public key is stored in `keys/<environment>/public.key`.
 
 ### Decryption
 
@@ -38,4 +38,4 @@ Run `./bin/encryptor decrypt --key <key> --environment <environment>` to decrypt
 
 For instance, running './bin/encryptor decrypt --key DATABASE_URL --environment development' will decrypt the file at `configuration/development/DATABASE_URL` and print the decrypted value to stdout.
 
-It assumes that the private key is stored in keys/<environment>/private.key.
+It assumes that the private key is stored in `keys/<environment>/private.key`.
