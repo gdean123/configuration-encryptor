@@ -36,6 +36,6 @@ It assumes that the public key is stored in `keys/<environment>/public.key`.
 
 Run `./bin/encryptor decrypt --key <key> --environment <environment>` to decrypt the value of the given key for the given environment using the private key and print it to stdout.
 
-For instance, running './bin/encryptor decrypt --key DATABASE_URL --environment development' will decrypt the file at `configuration/development/DATABASE_URL` and print the decrypted value to stdout.
+For instance, running `./bin/encryptor decrypt --key DATABASE_URL --environment development` will decrypt the file at `configuration/development/DATABASE_URL` and print the decrypted value to stdout.
 
 It assumes that the private key is stored in `keys/<environment>/private.key`.
