@@ -1,4 +1,4 @@
-# Encryptor
+# Configuration Encryptor
 
 This tool enables developers to encrypt and decrypt configuration data so that it can be stored safely in version control.
 
